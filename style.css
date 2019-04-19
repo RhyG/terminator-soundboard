@@ -10,6 +10,7 @@ body,html {
 
 body {
   background-image: url("terminator_bg.jpg");
+  background-size: cover;
   background-position: center;
   min-height: 100vh;
   display: flex;
