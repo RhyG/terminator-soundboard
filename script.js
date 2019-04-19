@@ -3,7 +3,7 @@ function removeTransition(e) {
     e.target.classList.remove('playing'); // remove the playing class from the element, reversing the transition
   }
 
-  function playSound(e) {
+  function playSoundKey(e) {
     const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
 
@@ -14,6 +14,16 @@ function removeTransition(e) {
     audio.play(); // plays the sound
   }
 
+  function playSoundClick(e) {
+    const keyCode = e.target.dataset.key;
+    const audio = document.querySelector(`audio[data-key="${keyCode}"]`);
+    audio.currentTime = 0;
+    audio.play();
+    if (e.target.className == 'key') e.target.classList.add('playing');
+    
+  }
+
   const keys = Array.from(document.querySelectorAll('.key')); // create an array of all the elements with the key class
   keys.forEach(key => key.addEventListener('transitionend', removeTransition)); // loop through the array and listen for the transition end event, callig the remove transition function
-  window.addEventListener('keydown', playSound); // listen for any key press and call the playSound function on it
+  window.addEventListener('keydown', playSoundKey);
+  window.addEventListener('click', playSoundClick); // listen for any key press and call the playSound function on it
